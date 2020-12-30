@@ -8,7 +8,11 @@
   2. Install local Node.js dependencies: `npm install`
   3. Build the project: `npm run build`
   4. Bootstrap the CDK Toolkit into your AWS account: `cdk bootstrap`
-  5. Deploy the stack: `cdk deploy -c image-tag=[latest|plain-text]`
+  5. Ensure your Environment variables are set:
+     1. O_AUTH_TOKEN = Github Personal Access Token to the repository to build.
+     2. REPOSITORY = the name of the repository. `cdk-single-page-app` for example
+     3. SOURCE_CODE_OWNER = the name of the organization or individual that the repo is owned by. `shafkevi` for example
+  6. Deploy the stack: `cdk deploy -c image-tag=[latest|plain-text]`
 
 ## Useful Commands
 
