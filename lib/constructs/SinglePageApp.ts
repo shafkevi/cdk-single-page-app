@@ -1,11 +1,11 @@
-import { Construct, SecretValue } from "@aws-cdk/core";
+import { Construct, SecretValue, CfnOutput } from "@aws-cdk/core";
 import { App, GitHubSourceCodeProvider } from "@aws-cdk/aws-amplify";
 
 export interface SinglePageAppProps {
 }
 
 export default class SinglePageApp extends Construct {
-
+  public readonly appId: string;
   constructor(scope: Construct, id: string, props: SinglePageAppProps) {
     super(scope, id);
 
@@ -27,6 +27,13 @@ export default class SinglePageApp extends Construct {
     app.addBranch("main",{
       autoBuild: true,
       branchName: "main"
+    });
+
+    this.appId = app.appId;
+
+    new CfnOutput(this, "appId", {
+      value: app.appId,
+      exportName: "appId"
     });
 
   }
