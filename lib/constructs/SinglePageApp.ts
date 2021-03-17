@@ -1,5 +1,6 @@
 import { Construct, SecretValue, CfnOutput } from "@aws-cdk/core";
 import { App, GitHubSourceCodeProvider } from "@aws-cdk/aws-amplify";
+import { BuildSpec } from "@aws-cdk/aws-codebuild";
 
 export interface SinglePageAppProps {
 }
@@ -21,7 +22,28 @@ export default class SinglePageApp extends Construct {
       environmentVariables: {
         "NODE_ENV": process.env.ENV || "",
         "VUE_APP_COLOR": process.env.COLOR || "",
-      }
+      },
+      // Custom Build
+      buildSpec: BuildSpec.fromObject({
+        version: '1.0',
+        frontend: {
+          phases: {
+            build: {
+              commands: [
+                'npm run build',
+              ]
+            }
+          },
+          artifacts: {
+            baseDirectory: "dist",
+            files: ["**/*"]
+          },
+          cache: {
+            paths: ["dist/**/*"]
+          }
+        }
+      }),
+        
     });
 
     app.addBranch("main",{

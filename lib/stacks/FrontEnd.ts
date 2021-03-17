@@ -9,6 +9,9 @@ export default class Template extends Stack {
     const app = new SinglePageApp(this, 'SinglePageApp', {});
 
     const now = new Date().toISOString();
+    
+
+    // Re-Build on CDK Deploy
     const customResource = new AwsCustomResource(this, `AmplifyBuild${now}`, {
       installLatestAwsSdk: false,
       onCreate: {
