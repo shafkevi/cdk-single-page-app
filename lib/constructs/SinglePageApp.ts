@@ -18,6 +18,10 @@ export default class SinglePageApp extends Construct {
         owner: process.env.SOURCE_CODE_OWNER || '',
         repository: process.env.REPOSITORY || ''
       }),
+      environmentVariables: {
+        "NODE_ENV": process.env.ENV || "",
+        "VUE_APP_COLOR": process.env.COLOR || "",
+      }
     });
 
     app.addBranch("main",{
